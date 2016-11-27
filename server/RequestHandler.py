@@ -14,6 +14,7 @@ class RequestHandler:
 
     API_URLS = {
         'auth': 'auth_service',
+        'auth/check': 'auth_service',
         'news': 'news_service',
         'logout': 'logout_service',
         'profile': 'profile_service'
@@ -29,7 +30,7 @@ class RequestHandler:
             print web.input()
             api_path = location[0] + ':' + str(location[1]) + '/' + name
             req = requests.get(api_path)
-            return "GET request %s : %s : %s" %(name, str(location), req.text)
+            return req.text
         else:
             print "Service not found"
 
@@ -43,6 +44,6 @@ class RequestHandler:
             api_path = location[0] + ':' + str(location[1]) + '/' + name
             print dict(web.input())
             req = requests.post(api_path, json = dict(web.input()))
-            return "POST request %s : %s : %s" %(name, str(location), req.text)
+            return req.text
         else:
             print "Service not found"
